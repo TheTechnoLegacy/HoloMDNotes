@@ -1,0 +1,4 @@
+#Thu May 21 18:24:53 YEKT 2026
+base.0=/home/val00n/Documents/OldAndroidProjects/MDNotes/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/home/val00n/Documents/OldAndroidProjects/MDNotes/app/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex
