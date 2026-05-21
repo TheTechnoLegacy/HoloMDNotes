@@ -2,7 +2,6 @@ package com.val00n.mdnotes;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +20,8 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Collections;
-
-import static android.content.ContentValues.TAG;
 
 public class MainActivity extends Activity {
 
@@ -41,19 +36,21 @@ public class MainActivity extends Activity {
 	private static final int MENU_ABOUT = 1;
 	private static final int MENU_SETTINGS = 2;
 	// Others
+	private SharedPreferences preferences;
 	private FileHelper fileHelper;
 	private ArrayAdapter<String> arrayAdapter;
-	private SharedPreferences preferences;
+	private ArrayList<FileMeta> filteredFiles;
 	private int sortMode = 0;
 	private boolean hasSDCard;
-	ArrayList<FileMeta> filteredFiles;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		final Context context = this;
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		fileHelper = new FileHelper(this);
+
+		preferences = getSharedPreferences("mainSettings", 0);
+		sortMode = preferences.getInt("sortMode", 0);
 
 		searchEditText = (EditText) findViewById(R.id.mainSearchEditText);
 		noteListView = (ListView) findViewById(R.id.mainNoteList);
@@ -62,22 +59,7 @@ public class MainActivity extends Activity {
 		newNoteButton = (Button) findViewById(R.id.mainNewNoteButton);
 		emptyListText = (TextView) findViewById(R.id.mainEmptyListTextView);
 
-		preferences = getSharedPreferences("mainSettings", 0);
-		sortMode = preferences.getInt("sortMode", 0);
-
-		if (!preferences.contains("hasSDCard")) {
-			if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-				preferences.edit().putBoolean("hasSDCard", true).commit();
-			} else {
-				preferences.edit().putBoolean("hasSDCard", false).commit();
-			}
-		}
-
-		hasSDCard = preferences.getBoolean("hasSDCard", false);
-
-		checkVaultPath();
-
-		fileHelper = new FileHelper(this);
+		checkStorageState();
 
 		arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1);
 		noteListView.setAdapter(arrayAdapter);
@@ -213,6 +195,18 @@ public class MainActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		refreshNoteList(null);
+		checkVaultPath();
+	}
+
+	private void checkStorageState() {
+		if (!preferences.contains("hasSDCard")) {
+			if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
+				preferences.edit().putBoolean("hasSDCard", true).commit();
+			} else {
+				preferences.edit().putBoolean("hasSDCard", false).commit();
+			}
+		}
+		hasSDCard = preferences.getBoolean("hasSDCard", false);
 		checkVaultPath();
 	}
 

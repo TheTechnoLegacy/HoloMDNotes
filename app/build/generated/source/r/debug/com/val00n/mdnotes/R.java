@@ -30,7 +30,7 @@ public final class R {
         public static final int settingsRenderHtmlSpinner=0x7f05000d;
         public static final int settingsRenderMdSpinner=0x7f05000b;
         public static final int settingsRenderTxtSpinner=0x7f05000c;
-        public static final int viewNoteContentText=0x7f050010;
+        public static final int viewNoteContentContainer=0x7f050010;
         public static final int viewNoteDateText=0x7f05000f;
         public static final int viewNoteEditButton=0x7f050011;
         public static final int viewNoteExitButton=0x7f050012;

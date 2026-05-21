@@ -75,7 +75,7 @@ public class SettingsActivity extends Activity {
 
     private void loadSettings() {
         renderMdSpinner.setSelection(preferences.getInt("mdRender", 0));
-        renderTxtSpinner.setSelection(preferences.getInt("txtRender", 0));
-        renderHtmlSpinner.setSelection(preferences.getInt("htmlRender", 0));
+        renderTxtSpinner.setSelection(preferences.getInt("txtRender", 2));
+        renderHtmlSpinner.setSelection(preferences.getInt("htmlRender", 1));
     }
 }

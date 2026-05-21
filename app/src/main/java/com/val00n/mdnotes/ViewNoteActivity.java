@@ -5,10 +5,15 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.Menu;
@@ -18,13 +23,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.markdownj.*;
 
+import static android.content.ContentValues.TAG;
+
 public class ViewNoteActivity extends Activity {
 
     // UI elements
+    private FrameLayout contentContainer;
     private TextView loadingPlaceholder;
     private TextView titleTextView;
     private TextView dateTextView;
     private TextView contentTextView;
+    private WebView contentWebView;
     private Button editButton;
     private Button exitButton;
     // MENU
@@ -37,33 +46,36 @@ public class ViewNoteActivity extends Activity {
     private String fileName;
     private String fileExtension;
     private Note note;
-    private String parsedContent;
+    private String parsedMarkdownContent;
     private boolean isLoading;
-    private Spanned noteHtml;
+    private Spanned parsedHtmlText;
+    private int renderMode; // 0 Markdownj + TextView; 1 Markdownj + WebView; 2 plain text
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_note);
-
-        loadingPlaceholder = (TextView) findViewById(R.id.viewNoteLoadingPlaceholder);
-        titleTextView = (TextView) findViewById(R.id.viewNoteTitleText);
-        dateTextView = (TextView) findViewById(R.id.viewNoteDateText);
-        contentTextView = (TextView) findViewById(R.id.viewNoteContentText);
-        editButton = (Button) findViewById(R.id.viewNoteEditButton);
-        exitButton = (Button) findViewById(R.id.viewNoteExitButton);
-
-        fileHelper = new FileHelper(ViewNoteActivity.this);
+        preferences = getSharedPreferences("globalSettings", 0);
 
         fileName = getIntent().getStringExtra("FILE_NAME");
         fileExtension = getIntent().getStringExtra("FILE_EXTENSION");
 
-        if (fileName != null && fileName.length() != 0) {
+        fileHelper = new FileHelper(ViewNoteActivity.this);
+
+        contentContainer = (FrameLayout) findViewById(R.id.viewNoteContentContainer);
+        loadingPlaceholder = (TextView) findViewById(R.id.viewNoteLoadingPlaceholder);
+        titleTextView = (TextView) findViewById(R.id.viewNoteTitleText);
+        dateTextView = (TextView) findViewById(R.id.viewNoteDateText);
+        editButton = (Button) findViewById(R.id.viewNoteEditButton);
+        exitButton = (Button) findViewById(R.id.viewNoteExitButton);
+
+        if (isFileMetaValid()) {
             loadNote(fileName);
         } else {
-            Toast.makeText(this, "Loading \"" + fileName + "\" failed", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
+
+        renderMode = loadRenderMode();
 
         editButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,6 +164,28 @@ public class ViewNoteActivity extends Activity {
                 .show();
     }
 
+    private boolean isFileMetaValid() {
+        if (fileName == null || fileName.length() == 0 || fileExtension == null || fileExtension.length() == 0) {
+            Toast.makeText(this, "Loading \"" + fileName + "\" failed", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    private int loadRenderMode() {
+        switch (fileExtension) {
+            case ".md":
+                return preferences.getInt("mdRender", 0);
+            case ".txt":
+                return preferences.getInt("txtRender", 2);
+            case ".html":
+                return preferences.getInt("htmlRender", 1);
+            default:
+                Log.d(TAG, "onCreate: Unknown note extension. Using plain text render.");
+                return 2; // plain text;
+        }
+    }
+
     private void deleteNote(final String fileTitle) {
         new AlertDialog.Builder(ViewNoteActivity.this)
                 .setTitle("Delete note \"" + fileTitle + "\"?")
@@ -181,6 +215,84 @@ public class ViewNoteActivity extends Activity {
         }
     }
 
+    private void displayNote() {
+        titleTextView.setText(note.title);
+        loadDate();
+
+        switch (renderMode) {
+            case 0: // Markdownj HTML to TextView text
+                contentTextView = new TextView(this);
+                contentTextView.setTextSize(16);
+                contentTextView.setLinksClickable(true);
+                contentContainer.addView(contentTextView);
+
+                parsedHtmlText = Html.fromHtml(parsedMarkdownContent);
+                contentTextView.setText(parsedHtmlText);
+                break;
+            case 1: // Markdownj HTML direct display via WebView
+                contentWebView = new WebView(this);
+                contentWebView.setBackgroundColor(Color.TRANSPARENT);
+                contentWebView.setPadding(0,0,0,0);
+                contentWebView.getSettings().setBuiltInZoomControls(false);
+                contentWebView.getSettings().setUseWideViewPort(false);
+                contentWebView.setInitialScale(100);
+                contentWebView.setVerticalScrollBarEnabled(false);
+                contentWebView.setHorizontalScrollBarEnabled(false);
+                contentWebView.setScrollContainer(false);
+                contentWebView.setLayoutParams(new FrameLayout.LayoutParams(
+                        FrameLayout.LayoutParams.FILL_PARENT,
+                        FrameLayout.LayoutParams.FILL_PARENT
+                ));
+
+                contentContainer.addView(contentWebView);
+
+                parsedMarkdownContent = setWebViewAppearance(parsedMarkdownContent);
+                contentWebView.loadDataWithBaseURL(null, parsedMarkdownContent, "text/html", "UTF-8", null);
+                break;
+            case 2: // just raw file text :D
+                contentTextView = new TextView(this);
+                contentTextView.setTextSize(16);
+                contentContainer.addView(contentTextView);
+
+                contentTextView.setText(note.content);
+                break;
+        }
+
+        loadingPlaceholder.setVisibility(View.GONE);
+    }
+
+    private String setWebViewAppearance(String body) {
+        int textColorInt = getThemeColor(android.R.attr.textColorSecondary); // wtf
+        String textColorHex = String.format("#%06X", (0xFFFFFF & textColorInt));
+
+        return "<html>\n" +
+                "<head>\n" +
+                "<style>\n" +
+                "  body {\n" +
+                "    margin: 0;\n" +
+                "    padding: 0;\n" +
+                "    color: " + textColorHex +";\n" +
+                "    font-size: 16px;\n" +
+                "    font-family: sans-serif;\n" +
+                "    line-height: 1.4;\n" +
+                "    background-color: transparent;\n" +
+                "  }\n" +
+                "  blockquote {\n" +
+                "    margin: 0.1em 0;\n" +
+                "    padding: 0.1em 0.9em;\n" +
+                "    border-left: 3px solid " + textColorHex + ";\n" +
+                "  }\n" +
+                "  pre, code {\n" +
+                "    white-space: pre-wrap;\n" +
+                "    word-wrap: break-word;\n" +
+                "    max-width: 100%;\n" +
+                "    font-family: monospace;\n" +
+                "  }\n" +
+                "</style>\n" +
+                "</head>\n" +
+                "<body>\n" + body + "</body>\n</html>";
+    }
+
     private void loadNote(final String fileName) {
         isLoading = true;
         Thread thread = new Thread(new Runnable() {
@@ -197,30 +309,46 @@ public class ViewNoteActivity extends Activity {
                     return;
                 }
 
-                final String markdownHtml = PROCESSOR.markdown(loadedNote.content);
-                final Note noteRef = loadedNote;
-                final String htmlRef = markdownHtml;
+                final String markdownHtml;
+                if (renderMode != 2) {
+                    markdownHtml = PROCESSOR.markdown(loadedNote.content);
+                } else {
+                    markdownHtml = null;
+                }
 
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         if (!isFinishing()) {
                             note = loadedNote;
-                            parsedContent = markdownHtml;
-
-                            loadingPlaceholder.setText("Parsing html...");
-                            noteHtml = Html.fromHtml(markdownHtml);
-
-                            loadingPlaceholder.setVisibility(View.GONE);
+                            parsedMarkdownContent = markdownHtml;
                             isLoading = false;
-                            titleTextView.setText(note.title);
-                            loadDate();
-                            contentTextView.setText(noteHtml);
+                            displayNote();
                         }
                     }
                 });
             }
         });
         thread.start();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        if (contentWebView != null) {
+            contentWebView.destroy();
+            contentContainer.removeView(contentWebView);
+        }
+    }
+
+    private int getThemeColor(int attrResId) {
+        TypedValue out = new TypedValue();
+        getTheme().resolveAttribute(attrResId, out, true);
+
+        if (out.resourceId != 0) {
+            return getResources().getColor(out.resourceId);
+        }
+        return out.data;
     }
 }
