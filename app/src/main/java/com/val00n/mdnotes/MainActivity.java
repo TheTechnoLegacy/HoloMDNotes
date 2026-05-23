@@ -36,12 +36,16 @@ public class MainActivity extends Activity {
 	private static final int MENU_ABOUT = 1;
 	private static final int MENU_SETTINGS = 2;
 	// Others
-	private SharedPreferences preferences;
+	private SharedPreferences mainPreferences;
+	private SharedPreferences globalPreferences;
 	private FileHelper fileHelper;
 	private ArrayAdapter<String> arrayAdapter;
-	private ArrayList<FileMeta> filteredFiles;
+	private ArrayList<FileMeta> filteredFiles = new ArrayList<FileMeta>();
+	private int shortTapAction;
+	private int longTapAction;
 	private int sortMode = 0;
 	private boolean hasSDCard;
+	private boolean disableDeleteDialog;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,8 +53,11 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.main);
 		fileHelper = new FileHelper(this);
 
-		preferences = getSharedPreferences("mainSettings", 0);
-		sortMode = preferences.getInt("sortMode", 0);
+		globalPreferences = getSharedPreferences("globalSettings", 0);
+		loadSettings();
+
+		mainPreferences = getSharedPreferences("mainSettings", 0);
+		sortMode = mainPreferences.getInt("sortMode", 0);
 
 		searchEditText = (EditText) findViewById(R.id.mainSearchEditText);
 		noteListView = (ListView) findViewById(R.id.mainNoteList);
@@ -67,36 +74,15 @@ public class MainActivity extends Activity {
 		noteListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String fileName = filteredFiles.get(position).fileName + filteredFiles.get(position).extension;
-				Intent intent = new Intent(MainActivity.this, ViewNoteActivity.class);
-				intent.putExtra("FILE_NAME", fileName);
-				intent.putExtra("FILE_EXTENSION", filteredFiles.get(position).extension);
-				startActivity(intent);
+				performAction(shortTapAction, position);
 			}
 		});
 
         noteListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                final String fileTitle = filteredFiles.get(position).fileName;
-				final String fileExtension = filteredFiles.get(position).extension;
-
-                new AlertDialog.Builder(MainActivity.this)
-                        .setTitle("Delete note \"" + fileTitle + "\"?")
-                        .setMessage("Are you sure? File can't be recovered after this.")
-                        .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                String fileName = fileTitle + fileExtension; // FIXME
-                                fileHelper.deleteFile(fileName);
-                                Toast.makeText(MainActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
-                                refreshNoteList(null);
-                            }
-                        })
-                        .setNegativeButton("Cancel", null)
-                        .show();
-
-                return false;
+				performAction(longTapAction, position);
+				return true;
             }
         });
 
@@ -111,9 +97,7 @@ public class MainActivity extends Activity {
 		newNoteButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
-				intent.putExtra("IS_NEW", true);
-				startActivity(intent);
+				editFile(0, true);
 			}
 		});
 
@@ -150,7 +134,7 @@ public class MainActivity extends Activity {
 						.setPositiveButton("Apply", new DialogInterface.OnClickListener() {
 							@Override
 							public void onClick(DialogInterface dialog, int which) {
-								preferences.edit().putInt("sortMode", sortMode).commit();
+								mainPreferences.edit().putInt("sortMode", sortMode).commit();
 								refreshNoteList(null);
 							}
 						})
@@ -172,13 +156,80 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	private void performAction(int tapAction, int position) {
+		switch (tapAction) {
+			case 0: // view
+				viewFile(position);
+				break;
+			case 1: // edit
+				editFile(position, false);
+				break;
+			case 2: // delete
+				removeNote(position);
+				break;
+		}
+	}
+
+	private void viewFile(int position) {
+		String fileName = filteredFiles.get(position).fileName + filteredFiles.get(position).extension;
+		Intent intent = new Intent(MainActivity.this, ViewNoteActivity.class);
+		intent.putExtra("FILE_NAME", fileName);
+		intent.putExtra("FILE_EXTENSION", filteredFiles.get(position).extension);
+		startActivity(intent);
+	}
+
+	private void editFile(int position, boolean isNewNote) {
+		Intent intent = new Intent(MainActivity.this, EditNoteActivity.class);
+		if (!isNewNote) {
+			String fileName = filteredFiles.get(position).fileName + filteredFiles.get(position).extension;
+			intent.putExtra("FILE_NAME", fileName);
+			intent.putExtra("FILE_EXTENSION", filteredFiles.get(position).extension);
+		} else {
+			intent.putExtra("IS_NEW", true);
+		}
+
+		startActivity(intent);
+	}
+
+	private void removeNote(int position) {
+		final String fileTitle = filteredFiles.get(position).fileName;
+		final String fileExtension = filteredFiles.get(position).extension;
+
+		if (!disableDeleteDialog) {
+			askForDelete(fileTitle, fileExtension);
+		} else {
+			deleteFile(fileTitle, fileExtension);
+		}
+	}
+
+	private void askForDelete(final String title, final String extension) {
+		new AlertDialog.Builder(MainActivity.this)
+				.setTitle("Delete note \"" + title + "\"?")
+				.setMessage("Are you sure? File can't be recovered after this.")
+				.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						deleteFile(title, extension);
+					}
+				})
+				.setNegativeButton("Cancel", null)
+				.show();
+	}
+
+	private void deleteFile(String title, String extension) {
+		String fileName = title + extension;
+		fileHelper.deleteFile(fileName);
+		Toast.makeText(MainActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+		refreshNoteList(null);
+	}
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem menuItem) {
 		switch (menuItem.getItemId()) {
 			case MENU_ABOUT:
 				new AlertDialog.Builder(MainActivity.this)
 						.setTitle("About")
-						.setMessage("MDNotes 1.0.0\n\nSimple notes app for old android devices, with markdown support :3\n\nval00n  2026")
+						.setMessage("MDNotes 1.0.0\n\nSimple notes app for old android devices, with markdown support.\n\nval00n ;3")
 						.setNeutralButton("Ok", null)
 						.show();
 				return true;
@@ -191,22 +242,29 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	private void loadSettings() {
+		disableDeleteDialog = globalPreferences.getBoolean("disableDeleteDialog", false);
+		shortTapAction = globalPreferences.getInt("shortTapAction", 0);
+		longTapAction = globalPreferences.getInt("longTapAction", 2);
+	}
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		refreshNoteList(null);
 		checkVaultPath();
+		loadSettings();
 	}
 
 	private void checkStorageState() {
-		if (!preferences.contains("hasSDCard")) {
+		if (!mainPreferences.contains("hasSDCard")) {
 			if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-				preferences.edit().putBoolean("hasSDCard", true).commit();
+				mainPreferences.edit().putBoolean("hasSDCard", true).commit();
 			} else {
-				preferences.edit().putBoolean("hasSDCard", false).commit();
+				mainPreferences.edit().putBoolean("hasSDCard", false).commit();
 			}
 		}
-		hasSDCard = preferences.getBoolean("hasSDCard", false);
+		hasSDCard = mainPreferences.getBoolean("hasSDCard", false);
 		checkVaultPath();
 	}
 
@@ -220,7 +278,7 @@ public class MainActivity extends Activity {
 						.setNeutralButton("Ok", null)
 						.show();
 
-				preferences.edit().putBoolean("hasSDCard", true).commit();
+				mainPreferences.edit().putBoolean("hasSDCard", true).commit();
 				hasSDCard = true;
 			}
 			else {
@@ -230,7 +288,7 @@ public class MainActivity extends Activity {
 						.setNeutralButton("Ok", null)
 						.show();
 
-				preferences.edit().putBoolean("hasSDCard", false).commit();
+				mainPreferences.edit().putBoolean("hasSDCard", false).commit();
 				hasSDCard = false;
 			}
 		}

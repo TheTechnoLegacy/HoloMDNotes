@@ -15,13 +15,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="26sp"
-            android:text="Loading..."/>
+            android:text="@string/loading"/>
         <TextView
             android:id="@+id/viewNoteDateText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="Last modified: XXXX-XX-XX"
+            android:text="@string/date_placeholder"
             android:layout_marginTop="8dp"/>
         <ScrollView
             android:layout_width="match_parent"
@@ -44,13 +44,13 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Edit note"/>
+                android:text="@string/edit_note"/>
             <Button
                 android:id="@+id/viewNoteExitButton"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Back to list"/>
+                android:text="@string/back_to_list"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -59,7 +59,7 @@
         android:id="@+id/viewNoteLoadingPlaceholder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Loading..."
+        android:text="@string/loading"
         android:layout_centerInParent="true"/>
 
 </RelativeLayout>

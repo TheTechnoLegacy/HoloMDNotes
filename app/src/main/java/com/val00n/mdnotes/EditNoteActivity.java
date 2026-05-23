@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -27,17 +28,22 @@ public class EditNoteActivity extends Activity {
     private static final int MENU_DELETE = 1;
     private static final int MENU_SAVE = 2;
     // Others
+    private SharedPreferences preferences;
     private FileHelper fileHelper;
     private boolean isNewNote;
     private Note note;
     private String originalFileName;
     private String newFileName;
     private String fileExtension;
+    private boolean disableDeleteDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.edit_note);
+        preferences = getSharedPreferences("globalSettings", 0);
+
+        disableDeleteDialog = preferences.getBoolean("disableDeleteDialog", false);
 
         titleEditText = (EditText) findViewById(R.id.editNoteTitleEditText);
         contentEditText = (EditText) findViewById(R.id.editNoteContentEditText);
@@ -48,13 +54,14 @@ public class EditNoteActivity extends Activity {
 
         isNewNote = getIntent().getBooleanExtra("IS_NEW", false);
         originalFileName = getIntent().getStringExtra("FILE_NAME");
+        note = new Note("",""); // i should fix it rfngjserngkjesnhrrgjnskjltrgnhkj
+        Log.d(TAG, "onCreate: NEW?   " + isNewNote);
 
         if (getIntent().hasExtra("FILE_EXTENSION")) {
             fileExtension = getIntent().getStringExtra("FILE_EXTENSION");
         } else {
             fileExtension = ".md";
         }
-
 
         if (!isNewNote) {
             if (originalFileName != null && originalFileName.length() != 0) {
@@ -150,7 +157,21 @@ public class EditNoteActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem menuItem) {
         switch (menuItem.getItemId()) {
             case MENU_DELETE:
-                deleteNote(note.title);
+                if (!disableDeleteDialog) {
+                    new AlertDialog.Builder(EditNoteActivity.this)
+                            .setTitle("Delete note \"" + note.title + "\"?")
+                            .setMessage("Are you sure? File can't be recovered after this.")
+                            .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    deleteNote(note.title);
+                                }
+                            })
+                            .setNegativeButton("Cancel", null)
+                            .show();
+                } else {
+                    deleteNote(note.title);
+                }
                 return true;
             case MENU_SAVE:
                 saveNote();
@@ -161,20 +182,14 @@ public class EditNoteActivity extends Activity {
     }
 
     private void deleteNote(final String fileTitle) {
-        new AlertDialog.Builder(EditNoteActivity.this)
-                .setTitle("Delete note \"" + fileTitle + "\"?")
-                .setMessage("Are you sure? File can't be recovered after this.")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String fileName = fileTitle + fileExtension; // wtf
-                        fileHelper.deleteFile(fileName);
-                        Toast.makeText(EditNoteActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
+        if (!isNewNote) {
+            String fileName = fileTitle + fileExtension;
+            fileHelper.deleteFile(fileName);
+            Toast.makeText(EditNoteActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            finish();
+        }
     }
 
     private boolean saveNote() {

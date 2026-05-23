@@ -64,8 +64,27 @@
                     "startLine": 5,
                     "startColumn": 4,
                     "startOffset": 199,
+                    "endColumn": 59,
+                    "endOffset": 254
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 236,
+                        "endColumn": 59,
+                        "endOffset": 291
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 259,
                     "endColumn": 44,
-                    "endOffset": 239
+                    "endOffset": 299
                 },
                 "from": {
                     "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
@@ -75,6 +94,481 @@
                         "startOffset": 16,
                         "endColumn": 44,
                         "endOffset": 56
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 7,
+                    "startColumn": 4,
+                    "startOffset": 304,
+                    "endColumn": 53,
+                    "endOffset": 353
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 10,
+                        "startColumn": 4,
+                        "startOffset": 508,
+                        "endColumn": 53,
+                        "endOffset": 557
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 8,
+                    "startColumn": 4,
+                    "startOffset": 358,
+                    "endColumn": 44,
+                    "endOffset": 398
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 12,
+                        "startColumn": 4,
+                        "startOffset": 603,
+                        "endColumn": 44,
+                        "endOffset": 643
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 9,
+                    "startColumn": 4,
+                    "startOffset": 403,
+                    "endColumn": 55,
+                    "endOffset": 454
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 14,
+                        "startColumn": 4,
+                        "startOffset": 698,
+                        "endColumn": 55,
+                        "endOffset": 749
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 10,
+                    "startColumn": 4,
+                    "startOffset": 459,
+                    "endColumn": 70,
+                    "endOffset": 525
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 8,
+                        "startColumn": 4,
+                        "startOffset": 389,
+                        "endColumn": 70,
+                        "endOffset": 455
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 11,
+                    "startColumn": 4,
+                    "startOffset": 530,
+                    "endColumn": 71,
+                    "endOffset": 597
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 24,
+                        "startColumn": 4,
+                        "startOffset": 1370,
+                        "endColumn": 71,
+                        "endOffset": 1437
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 12,
+                    "startColumn": 4,
+                    "startOffset": 602,
+                    "endColumn": 47,
+                    "endOffset": 645
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 9,
+                        "startColumn": 4,
+                        "startOffset": 460,
+                        "endColumn": 47,
+                        "endOffset": 503
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 13,
+                    "startColumn": 4,
+                    "startOffset": 650,
+                    "endColumn": 46,
+                    "endOffset": 692
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 342,
+                        "endColumn": 46,
+                        "endOffset": 384
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 14,
+                    "startColumn": 4,
+                    "startOffset": 697,
+                    "endColumn": 59,
+                    "endOffset": 752
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 27,
+                        "startColumn": 4,
+                        "startOffset": 1557,
+                        "endColumn": 59,
+                        "endOffset": 1612
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 15,
+                    "startColumn": 4,
+                    "startOffset": 757,
+                    "endColumn": 45,
+                    "endOffset": 798
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 296,
+                        "endColumn": 45,
+                        "endOffset": 337
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 16,
+                    "startColumn": 4,
+                    "startOffset": 803,
+                    "endColumn": 58,
+                    "endOffset": 857
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 61,
+                        "endColumn": 58,
+                        "endOffset": 115
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 17,
+                    "startColumn": 4,
+                    "startOffset": 862,
+                    "endColumn": 75,
+                    "endOffset": 933
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 21,
+                        "startColumn": 4,
+                        "startOffset": 1162,
+                        "endColumn": 75,
+                        "endOffset": 1233
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 18,
+                    "startColumn": 4,
+                    "startOffset": 938,
+                    "endColumn": 71,
+                    "endOffset": 1005
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 1016,
+                        "endColumn": 71,
+                        "endOffset": 1083
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 19,
+                    "startColumn": 4,
+                    "startOffset": 1010,
+                    "endColumn": 73,
+                    "endOffset": 1079
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 20,
+                        "startColumn": 4,
+                        "startOffset": 1088,
+                        "endColumn": 73,
+                        "endOffset": 1157
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 20,
+                    "startColumn": 4,
+                    "startOffset": 1084,
+                    "endColumn": 47,
+                    "endOffset": 1127
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 838,
+                        "endColumn": 47,
+                        "endOffset": 881
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 21,
+                    "startColumn": 4,
+                    "startOffset": 1132,
+                    "endColumn": 129,
+                    "endOffset": 1257
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 886,
+                        "endColumn": 129,
+                        "endOffset": 1011
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 22,
+                    "startColumn": 4,
+                    "startOffset": 1262,
+                    "endColumn": 49,
+                    "endOffset": 1307
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 120,
+                        "endColumn": 49,
+                        "endOffset": 165
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 23,
+                    "startColumn": 4,
+                    "startOffset": 1312,
+                    "endColumn": 45,
+                    "endOffset": 1353
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 16,
+                        "startColumn": 4,
+                        "startOffset": 792,
+                        "endColumn": 45,
+                        "endOffset": 833
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 24,
+                    "startColumn": 4,
+                    "startOffset": 1358,
+                    "endColumn": 65,
+                    "endOffset": 1419
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 170,
+                        "endColumn": 65,
+                        "endOffset": 231
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 25,
+                    "startColumn": 4,
+                    "startOffset": 1424,
+                    "endColumn": 61,
+                    "endOffset": 1481
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 26,
+                        "startColumn": 4,
+                        "startOffset": 1495,
+                        "endColumn": 61,
+                        "endOffset": 1552
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 26,
+                    "startColumn": 4,
+                    "startOffset": 1486,
+                    "endColumn": 52,
+                    "endOffset": 1534
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 25,
+                        "startColumn": 4,
+                        "startOffset": 1442,
+                        "endColumn": 52,
+                        "endOffset": 1490
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 27,
+                    "startColumn": 4,
+                    "startOffset": 1539,
+                    "endColumn": 40,
+                    "endOffset": 1575
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 11,
+                        "startColumn": 4,
+                        "startOffset": 562,
+                        "endColumn": 40,
+                        "endOffset": 598
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 28,
+                    "startColumn": 4,
+                    "startOffset": 1580,
+                    "endColumn": 49,
+                    "endOffset": 1625
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 13,
+                        "startColumn": 4,
+                        "startOffset": 648,
+                        "endColumn": 49,
+                        "endOffset": 693
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 29,
+                    "startColumn": 4,
+                    "startOffset": 1630,
+                    "endColumn": 49,
+                    "endOffset": 1675
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 22,
+                        "startColumn": 4,
+                        "startOffset": 1238,
+                        "endColumn": 49,
+                        "endOffset": 1283
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 30,
+                    "startColumn": 4,
+                    "startOffset": 1680,
+                    "endColumn": 81,
+                    "endOffset": 1757
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 23,
+                        "startColumn": 4,
+                        "startOffset": 1288,
+                        "endColumn": 81,
+                        "endOffset": 1365
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 31,
+                    "startColumn": 4,
+                    "startOffset": 1762,
+                    "endColumn": 37,
+                    "endOffset": 1795
+                },
+                "from": {
+                    "file": "/home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/res/values/strings.xml",
+                    "position": {
+                        "startLine": 15,
+                        "startColumn": 4,
+                        "startOffset": 754,
+                        "endColumn": 37,
+                        "endOffset": 787
                     }
                 }
             }

@@ -14,7 +14,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Settings"
+                android:text="@string/settings"
                 android:textStyle="bold"
                 android:textSize="32sp"
                 android:layout_marginBottom="8dp"/>
@@ -22,14 +22,64 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rendering"
+                android:text="@string/ui_actions"
                 android:textStyle="bold"
                 android:textSize="26sp"
                 android:layout_marginBottom="2dp"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Selected rendering mode, changes look of displayed text, due parse method differences:"
+                android:text="@string/ui_actions_desc"
+                android:textStyle="italic"
+                android:textSize="16sp"
+                android:layout_marginBottom="8dp"/>
+            <CheckBox
+                android:id="@+id/settingsDisableDeleteDialogCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/disable_delete_dialog"
+                android:layout_marginBottom="2dp"/>
+            <CheckBox
+                android:id="@+id/settingsShowDateCheckBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/show_date"
+                android:checked="true"
+                android:layout_marginBottom="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/short_tap_action"
+                android:textSize="18sp"
+                android:layout_marginBottom="2dp"/>
+            <Spinner
+                android:id="@+id/settingsShortTapActionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/long_tap_action"
+                android:textSize="18sp"
+                android:layout_marginBottom="2dp"/>
+            <Spinner
+                android:id="@+id/settingsLongTapActionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rendering"
+                android:textStyle="bold"
+                android:textSize="26sp"
+                android:layout_marginBottom="2dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rendering_desc"
                 android:textStyle="italic"
                 android:textSize="16sp"
                 android:layout_marginBottom="8dp"/>
@@ -37,7 +87,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rendering mode for .md files"
+                android:text="@string/render_mode_md"
                 android:textSize="18sp"
                 android:layout_marginBottom="2dp"/>
             <Spinner
@@ -49,7 +99,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rendering mode for .txt files"
+                android:text="@string/render_mode_txt"
                 android:textSize="18sp"
                 android:layout_marginBottom="2dp"/>
             <Spinner
@@ -61,7 +111,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rendering mode for .html files"
+                android:text="@string/render_mode_html"
                 android:textSize="18sp"
                 android:layout_marginBottom="2dp"/>
             <Spinner

@@ -49,6 +49,8 @@ public class ViewNoteActivity extends Activity {
     private String parsedMarkdownContent;
     private boolean isLoading;
     private Spanned parsedHtmlText;
+    private boolean showDate = true;
+    private boolean disableDeleteDialog = false;
     private int renderMode; // 0 Markdownj + TextView; 1 Markdownj + WebView; 2 plain text
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +58,12 @@ public class ViewNoteActivity extends Activity {
         setContentView(R.layout.view_note);
         preferences = getSharedPreferences("globalSettings", 0);
 
+        disableDeleteDialog = preferences.getBoolean("disableDeleteDialog", false);
+        showDate = preferences.getBoolean("showNoteDate", true);
+
         fileName = getIntent().getStringExtra("FILE_NAME");
         fileExtension = getIntent().getStringExtra("FILE_EXTENSION");
+
 
         fileHelper = new FileHelper(ViewNoteActivity.this);
 
@@ -67,6 +73,10 @@ public class ViewNoteActivity extends Activity {
         dateTextView = (TextView) findViewById(R.id.viewNoteDateText);
         editButton = (Button) findViewById(R.id.viewNoteEditButton);
         exitButton = (Button) findViewById(R.id.viewNoteExitButton);
+
+        if (!showDate) {
+            dateTextView.setVisibility(View.GONE);
+        }
 
         if (isFileMetaValid()) {
             loadNote(fileName);
@@ -113,7 +123,21 @@ public class ViewNoteActivity extends Activity {
         switch (menuItem.getItemId()) {
             case MENU_DELETE:
                 if (!isLoading) {
-                    deleteNote(note.title);
+                    if (!disableDeleteDialog) {
+                        new AlertDialog.Builder(ViewNoteActivity.this)
+                                .setTitle("Delete note \"" + note.title + "\"?")
+                                .setMessage("Are you sure? File can't be recovered after this.")
+                                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        deleteNote(note.title);
+                                    }
+                                })
+                                .setNegativeButton("Cancel", null)
+                                .show();
+                    } else {
+                        deleteNote(note.title);
+                    }
                 } else {
                     Toast.makeText(this, "File not loaded yet!", Toast.LENGTH_SHORT).show();
                 }
@@ -187,20 +211,10 @@ public class ViewNoteActivity extends Activity {
     }
 
     private void deleteNote(final String fileTitle) {
-        new AlertDialog.Builder(ViewNoteActivity.this)
-                .setTitle("Delete note \"" + fileTitle + "\"?")
-                .setMessage("Are you sure? File can't be recovered after this.")
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        String fileName = fileTitle + fileExtension;
-                        fileHelper.deleteFile(fileName);
-                        Toast.makeText(ViewNoteActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                })
-                .setNegativeButton("Cancel", null)
-                .show();
+        String fileName = fileTitle + fileExtension;
+        fileHelper.deleteFile(fileName);
+        Toast.makeText(ViewNoteActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     private void loadDate() {
@@ -222,7 +236,7 @@ public class ViewNoteActivity extends Activity {
         switch (renderMode) {
             case 0: // Markdownj HTML to TextView text
                 contentTextView = new TextView(this);
-                contentTextView.setTextSize(16);
+                contentTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16);
                 contentTextView.setLinksClickable(true);
                 contentContainer.addView(contentTextView);
 

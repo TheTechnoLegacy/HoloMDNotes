@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:visibility="gone"
-        android:text="there is no notes yet"/>
+        android:text="@string/no_notes"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -27,10 +27,11 @@
                 android:layout_marginTop="1dp"
                 android:id="@+id/mainSearchEditText"
                 android:layout_weight="1"
-                android:hint="Search..."
+                android:hint="@string/search_hint"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content" />
             <ImageButton
+                android:contentDescription="@string/settings_button_content_desc"
                 android:id="@+id/mainSettingsButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -39,6 +40,7 @@
                 android:padding="6dp"
                 android:layout_marginTop="1dp"/>
             <ImageButton
+                android:contentDescription="@string/align_button_content_desc"
                 android:id="@+id/mainSortButton"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -60,7 +62,7 @@
             android:id="@+id/mainNewNoteButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="New note" />
+            android:text="@string/new_note" />
     </LinearLayout>
 
 </RelativeLayout>
