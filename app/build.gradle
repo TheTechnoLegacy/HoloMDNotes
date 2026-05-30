@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.0"
     defaultConfig {
         applicationId "com.val00n.mdnotes"
-        minSdkVersion 3 // Android 1.5 api
+        minSdkVersion 11 // Android 3.0 api
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
