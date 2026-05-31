@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lay"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/mainEmptyListTextView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text="@string/no_notes"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="1dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_marginTop="1dp"
+                android:id="@+id/mainSearchEditText"
+                android:layout_weight="1"
+                android:hint="@string/search_hint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:contentDescription="@string/settings_button_content_desc"
+                android:id="@+id/mainSettingsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_preferences"
+                android:scaleType="centerInside"
+                android:padding="6dp"
+                android:layout_marginTop="1dp"/>
+            <ImageButton
+                android:contentDescription="@string/align_button_content_desc"
+                android:id="@+id/mainSortButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:scaleType="fitCenter"
+                android:padding="6dp"
+                android:layout_marginTop="1dp"/>
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/mainNoteList"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+        </ListView>
+
+        <Button
+            android:layout_marginTop="2dp"
+            android:id="@+id/mainNewNoteButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/new_note" />
+    </LinearLayout>
+
+</RelativeLayout>
+

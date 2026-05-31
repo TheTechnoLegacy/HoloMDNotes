@@ -1,0 +1,77 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:2:1-29:12
+	package
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:3:5-33
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:2:11-69
+	android:versionCode
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:5:5-81
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:5:22-78
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:6:5-80
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:6:22-77
+application
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:8:5-28:19
+	android:label
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:11:9-41
+	android:supportsRtl
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:13:9-35
+	android:roundIcon
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:12:9-50
+	android:allowBackup
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:9:9-35
+	android:icon
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:10:9-45
+activity#com.techno.holomdnotes.MainActivity
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:15:9-22:16
+	android:label
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:16:9-41
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:17:9-55
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:18:9-21:25
+action#android.intent.action.MAIN
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:19:13-65
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:19:21-62
+category#android.intent.category.LAUNCHER
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:20:13-73
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:20:23-70
+activity#com.techno.holomdnotes.SettingsActivity
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:24:9-97
+	android:label
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:24:70-94
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:24:19-69
+activity#com.techno.holomdnotes.EditNoteActivity
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:25:9-98
+	android:label
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:25:70-95
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:25:19-69
+activity#com.techno.holomdnotes.ViewNoteActivity
+ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:26:9-98
+	android:label
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:26:70-95
+	android:name
+		ADDED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml:26:19-69
+uses-sdk
+INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+	android:targetSdkVersion
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml
+		INJECTED from /home/val00n/Documents/OldAndroidProjects/MDNotes/app/src/main/AndroidManifest.xml

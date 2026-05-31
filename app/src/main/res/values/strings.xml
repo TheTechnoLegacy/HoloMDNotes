@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">HoloMDNotes</string>
+    <string name="no_notes">there are no notes yet</string>
+    <string name="search_hint">Search...</string>
+    <string name="settings_button_content_desc">Settings</string>
+    <string name="align_button_content_desc">Align</string>
+    <string name="new_note">New note</string>
+    <string name="loading">Loading...</string>
+    <string name="date_placeholder">Last modified: XXXX-XX-XX</string>
+    <string name="edit_note">Edit note</string>
+    <string name="back_to_list">Back to list</string>
+    <string name="title">Title:</string>
+    <string name="content">Content:</string>
+    <string name="title_hint">My note...</string>
+    <string name="content_hint">My thoughts...</string>
+    <string name="view">View</string>
+    <string name="settings">Settings</string>
+    <string name="rendering">Rendering</string>
+    <string name="rendering_desc">Selected rendering mode, changes look of displayed text, due parse method differences:</string>
+    <string name="render_mode_md">Rendering mode for .md files</string>
+    <string name="render_mode_txt">Rendering mode for .txt files</string>
+    <string name="render_mode_html">Rendering mode for .html files</string>
+    <string name="ui_actions">UI actions</string>
+    <string name="ui_actions_desc">Changes the way user interface works:</string>
+    <string name="disable_delete_dialog">Disable delete dialog</string>
+    <string name="show_date">Show note date</string>
+    <string name="short_tap_action">Short tap action</string>
+    <string name="long_tap_action">Long tap action</string>
+</resources>
